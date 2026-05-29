@@ -2,19 +2,23 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
+import os
+
+# Caminho base do projeto
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Carrega o modelo e os encoders
-with open('../data/modelo.pkl', 'rb') as f:
+with open(os.path.join(BASE_DIR, 'data', 'modelo.pkl'), 'rb') as f:
     modelo = pickle.load(f)
 
-with open('../data/le_district.pkl', 'rb') as f:
+with open(os.path.join(BASE_DIR, 'data', 'le_district.pkl'), 'rb') as f:
     le_district = pickle.load(f)
 
-with open('../data/le_type.pkl', 'rb') as f:
+with open(os.path.join(BASE_DIR, 'data', 'le_type.pkl'), 'rb') as f:
     le_type = pickle.load(f)
 
-
-df = pd.read_csv('../data/imoveis_clean.csv')
+# Carrega o dataset
+df = pd.read_csv(os.path.join(BASE_DIR, 'data', 'imoveis_clean.csv'))
 
 
 st.set_page_config(page_title='Previsão de Aluguel SP', page_icon='🏘️', layout='centered')
